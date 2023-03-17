@@ -1,0 +1,20 @@
+version: '3.3'
+services:
+  proxy_redis:
+    image: "redis"
+    container_name: proxy_redis
+  proxy_pool:
+    image: "moongu0514/proxy_pool:latest"
+    container_name: proxy_pool
+    ports:
+      - "5010:5010"
+    depends_on:
+      - proxy_redis
+    environment:
+      DB_CONN: "redis://@proxy_redis:6379/0"
+  sms_att:
+    image: "moongu0514/sms-att:latest"
+    container_name: sms_att
+    depends_on:
+      - proxy_pool
+    command: /bin/bash -c "sleep 45 && python -u test/sms-att-plus.py"
