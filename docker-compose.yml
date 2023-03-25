@@ -18,6 +18,8 @@ services:
     image: "moongu0514/ocrwebsite:latest"
     container_name: web-handler
     restart: always
+    volumes:
+      - ./db.sqlite3:/app/db.sqlite3
     ports:
       - '8000:8000'
   sms_att:
