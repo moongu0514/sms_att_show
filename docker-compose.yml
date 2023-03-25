@@ -12,18 +12,16 @@ services:
       - proxy_redis
     environment:
       DB_CONN: "redis://@proxy_redis:6379/0"
-#  web-handler:
-#    image: "web-handler:latest"
-#    container_name: web-handler
-#    volumes:
-#      - "./image/:/app/image/"
-#    command: /bin/bash -c "sleep 1 && python manage.py runserver"
+  web-handler:
+    image: "moongu0514/ocrwebsite:latest"
+    container_name: web-handler
+    ports:
+      - '8000:8000'
   sms_att:
-#    image: "sms-att:latest"
     image: "moongu0514/sms-att:latest"
     container_name: sms_att
     volumes:
     - "./log/:/app/log/"
     depends_on:
       - proxy_pool
-    command: /bin/bash -c "sleep 45 && python -u startup.py"
+    command: /bin/bash -c "sleep 1 && python -u startup.py"
