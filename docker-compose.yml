@@ -24,4 +24,4 @@ services:
     - "./log/:/app/log/"
     depends_on:
       - proxy_pool
-    command: /bin/bash -c "sleep 1 && python -u startup.py"
+    command: /bin/bash -c "sleep 45 && python -u startup.py"
